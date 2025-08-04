@@ -69,7 +69,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 mr-2 text-primary" />
-                Connaught Place, Delhi
+                Dwarka, New Delhi
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ const Footer = () => {
 
             {/* Copyright */}
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-muted-foreground">
-              <p>© 2024 Moon Production. All rights reserved.</p>
+              <p>© 2025 Moon Production. All rights reserved.</p>
               <div className="flex space-x-4">
                 <a href="#" className="hover:text-primary transition-studio">Privacy Policy</a>
                 <a href="#" className="hover:text-primary transition-studio">Terms of Service</a>
@@ -176,7 +176,7 @@ const Footer = () => {
             </div>
             <Button 
               className="studio-glow animate-pulse-glow whitespace-nowrap"
-              onClick={() => window.open('tel:+919876543210', '_blank')}
+              onClick={() => window.open('tel:+918528934948', '_blank')}
             >
               📞 Emergency Booking
             </Button>
