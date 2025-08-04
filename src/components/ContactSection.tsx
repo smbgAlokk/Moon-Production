@@ -43,9 +43,9 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: "Call Us",
-      info: "+91 9876543210",
+      info: "+91 8528934948",
       description: "Available 9 AM - 9 PM",
-      action: "tel:+919876543210"
+      action: "tel:+918528934948"
     },
     {
       icon: Mail,
@@ -64,9 +64,9 @@ const ContactSection = () => {
     {
       icon: MessageCircle,
       title: "WhatsApp",
-      info: "+91 9876543210",
+      info: "+91 8528934948",
       description: "Quick responses guaranteed",
-      action: "https://wa.me/919876543210"
+      action: "https://wa.me/918528934948"
     }
   ];
 
@@ -172,9 +172,9 @@ const ContactSection = () => {
                   <Button 
                     type="submit" 
                     size="lg" 
-                    className="w-full studio-glow hover-glow transition-bounce"
+                    className="w-full studio-glow hover-glow transition-bounce text-sm sm:text-base"
                   >
-                    <Send className="w-5 h-5 mr-2" />
+                    <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Send Message
                   </Button>
                 </form>
@@ -192,19 +192,19 @@ const ContactSection = () => {
                   className="glass-effect hover-glow transition-studio border-primary/20 group cursor-pointer"
                   onClick={() => window.open(item.action, '_blank')}
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-studio">
-                        <IconComponent className="w-6 h-6 text-primary" />
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex items-start space-x-3 sm:space-x-4">
+                      <div className="p-2 sm:p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-studio flex-shrink-0">
+                        <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-heading text-lg text-foreground mb-1">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-heading text-base sm:text-lg text-foreground mb-1">
                           {item.title}
                         </h3>
-                        <p className="text-primary font-medium mb-1">
+                        <p className="text-primary font-medium mb-1 text-sm sm:text-base break-all">
                           {item.info}
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           {item.description}
                         </p>
                       </div>
@@ -217,25 +217,25 @@ const ContactSection = () => {
             {/* Business Hours */}
             <Card className="glass-effect border-primary/20">
               <CardHeader>
-                <CardTitle className="text-xl font-heading text-foreground">
-                  <Clock className="w-5 h-5 inline-block mr-2" />
+                <CardTitle className="text-lg sm:text-xl font-heading text-foreground">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 inline-block mr-2" />
                   Studio Hours
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
+              <CardContent className="space-y-2 sm:space-y-3">
+                <div className="flex justify-between text-sm sm:text-base">
                   <span>Monday - Friday</span>
                   <span className="text-primary">9:00 AM - 10:00 PM</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-sm sm:text-base">
                   <span>Saturday</span>
                   <span className="text-primary">10:00 AM - 8:00 PM</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-sm sm:text-base">
                   <span>Sunday</span>
                   <span className="text-primary">12:00 PM - 6:00 PM</span>
                 </div>
-                <div className="text-sm text-muted-foreground pt-2 border-t border-border/50">
+                <div className="text-xs sm:text-sm text-muted-foreground pt-2 border-t border-border/50">
                   * Extended hours available by appointment
                 </div>
               </CardContent>
@@ -243,16 +243,16 @@ const ContactSection = () => {
 
             {/* Emergency Contact */}
             <Card className="glass-effect border-primary/20 bg-primary/5">
-              <CardContent className="p-6 text-center">
-                <h3 className="font-heading text-lg text-foreground mb-2">
+              <CardContent className="p-4 sm:p-6 text-center">
+                <h3 className="font-heading text-base sm:text-lg text-foreground mb-2">
                   🚨 Urgent Booking?
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                   Need a same-day session? Call our emergency line
                 </p>
                 <Button 
-                  className="w-full studio-glow animate-pulse-glow"
-                  onClick={() => window.open('tel:+919876543210', '_blank')}
+                  className="w-full studio-glow animate-pulse-glow text-sm sm:text-base"
+                  onClick={() => window.open('tel:+918528934948', '_blank')}
                 >
                   📞 Emergency Line
                 </Button>
@@ -265,21 +265,22 @@ const ContactSection = () => {
         <div className="mt-16">
           <Card className="glass-effect border-primary/20 overflow-hidden">
             <CardContent className="p-0">
-              <div className="h-64 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <p className="text-lg font-heading text-foreground mb-2">
+              <div className="h-48 sm:h-64 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                <div className="text-center px-4">
+                  <MapPin className="w-8 h-8 sm:w-12 sm:h-12 text-primary mx-auto mb-3 sm:mb-4" />
+                  <p className="text-base sm:text-lg font-heading text-foreground mb-2">
                     Moon Production Studio
                   </p>
-                  <p className="text-muted-foreground">
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Connaught Place, New Delhi - 110001
                   </p>
                   <Button 
                     variant="outline" 
-                    className="mt-4 hover-glow"
+                    className="mt-4 hover-glow text-sm sm:text-base"
                     onClick={() => window.open('https://maps.google.com', '_blank')}
                   >
-                    View on Google Maps
+                    <span className="hidden sm:inline">View on Google Maps</span>
+                    <span className="sm:hidden">View Map</span>
                   </Button>
                 </div>
               </div>

@@ -38,24 +38,27 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12">
             <Button 
               size="lg" 
-              className="studio-glow hover-glow text-lg px-8 py-4 min-w-[200px] transition-bounce"
+              className="studio-glow hover-glow text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 min-w-[160px] sm:min-w-[200px] transition-bounce"
               asChild
             >
               <Link to="/booking">
-                <Calendar className="w-5 h-5 mr-2" />
-                🎙️ Book Your Session
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                <span className="hidden sm:inline">🎙️ Book Your Session</span>
+                <span className="sm:hidden">🎙️ Book Now</span>
               </Link>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-lg px-8 py-4 min-w-[200px] glass-effect hover-glow transition-bounce"
+              className="text-base sm:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-[160px] sm:min-w-[200px] glass-effect hover-glow transition-bounce"
+              onClick={() => window.open('tel:+918528934948', '_blank')}
             >
-              <Phone className="w-5 h-5 mr-2" />
-              📞 Contact Us Now
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="hidden sm:inline">📞 Contact Us Now</span>
+              <span className="sm:hidden">📞 Call Now</span>
             </Button>
           </div>
 
