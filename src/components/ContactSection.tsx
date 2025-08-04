@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,13 +20,15 @@ const ContactSection = () => {
     email: "",
     phone: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -35,7 +43,7 @@ const ContactSection = () => {
       email: "",
       phone: "",
       subject: "",
-      message: ""
+      message: "",
     });
   };
 
@@ -45,33 +53,36 @@ const ContactSection = () => {
       title: "Call Us",
       info: "+91 8528934948",
       description: "Available 9 AM - 9 PM",
-      action: "tel:+918528934948"
+      action: "tel:+918528934948",
     },
     {
       icon: Mail,
       title: "Email Us",
-      info: "hello@moonproduction.com",
+      info: "contactus.moonstudio@gmail.com",
       description: "We reply within 24 hours",
-      action: "mailto:hello@moonproduction.com"
+      action: "mailto:contactus.moonstudio@gmail.com",
     },
     {
       icon: MapPin,
       title: "Visit Us",
       info: "Connaught Place, New Delhi",
       description: "Delhi 110001, India",
-      action: "https://maps.google.com"
+      action: "https://maps.google.com",
     },
     {
       icon: MessageCircle,
       title: "WhatsApp",
       info: "+91 8528934948",
       description: "Quick responses guaranteed",
-      action: "https://wa.me/918528934948"
-    }
+      action: "https://wa.me/918528934948",
+    },
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-20 bg-background relative overflow-hidden"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -87,7 +98,8 @@ const ContactSection = () => {
             <span className="text-foreground">TOUCH</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We'd love to hear from you! Reach out for bookings, collaborations, or just to say hello.
+            We'd love to hear from you! Reach out for bookings, collaborations,
+            or just to say hello.
           </p>
         </div>
 
@@ -101,7 +113,8 @@ const ContactSection = () => {
                   Send us a Message
                 </CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll get back to you as soon as possible
+                  Fill out the form below and we'll get back to you as soon as
+                  possible
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -169,9 +182,9 @@ const ContactSection = () => {
                     />
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
+                  <Button
+                    type="submit"
+                    size="lg"
                     className="w-full studio-glow hover-glow transition-bounce text-sm sm:text-base"
                   >
                     <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
@@ -187,10 +200,10 @@ const ContactSection = () => {
             {contactInfo.map((item, index) => {
               const IconComponent = item.icon;
               return (
-                <Card 
-                  key={index} 
+                <Card
+                  key={index}
                   className="glass-effect hover-glow transition-studio border-primary/20 group cursor-pointer"
-                  onClick={() => window.open(item.action, '_blank')}
+                  onClick={() => window.open(item.action, "_blank")}
                 >
                   <CardContent className="p-4 sm:p-6">
                     <div className="flex items-start space-x-3 sm:space-x-4">
@@ -250,9 +263,9 @@ const ContactSection = () => {
                 <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                   Need a same-day session? Call our emergency line
                 </p>
-                <Button 
+                <Button
                   className="w-full studio-glow animate-pulse-glow text-sm sm:text-base"
-                  onClick={() => window.open('tel:+918528934948', '_blank')}
+                  onClick={() => window.open("tel:+918528934948", "_blank")}
                 >
                   📞 Emergency Line
                 </Button>
@@ -274,12 +287,16 @@ const ContactSection = () => {
                   <p className="text-sm sm:text-base text-muted-foreground">
                     Connaught Place, New Delhi - 110001
                   </p>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="mt-4 hover-glow text-sm sm:text-base"
-                    onClick={() => window.open('https://maps.google.com', '_blank')}
+                    onClick={() =>
+                      window.open("https://maps.google.com", "_blank")
+                    }
                   >
-                    <span className="hidden sm:inline">View on Google Maps</span>
+                    <span className="hidden sm:inline">
+                      View on Google Maps
+                    </span>
                     <span className="sm:hidden">View Map</span>
                   </Button>
                 </div>

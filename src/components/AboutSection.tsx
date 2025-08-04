@@ -115,9 +115,9 @@ const AboutSection = () => {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { name: "Alex Johnson", role: "Lead Producer", specialty: "Music Production" },
-              { name: "Sarah Chen", role: "Sound Engineer", specialty: "Mixing & Mastering" },
-              { name: "Mike Rodriguez", role: "Video Director", specialty: "Visual Content" }
+              { name: "Ashwani Malik", role: "Lead Producer", specialty: "Composer" },
+              { name: "Alok Manchal", role: "Sound Engineer", specialty: "Mixing & Mastering, Visual Content and Lyricist" },
+              { name: "Rahul Sharma", role: "Producer", specialty: "Music Production" }
             ].map((member, index) => (
               <Card key={index} className="glass-effect hover-glow transition-studio border-primary/20">
                 <CardContent className="p-6 text-center">
