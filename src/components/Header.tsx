@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,8 +63,8 @@ const Header = () => {
               <Phone className="w-4 h-4 mr-2" />
               Call Now
             </Button>
-            <Button size="sm" className="studio-glow animate-pulse-glow">
-              🎙️ Book Session
+            <Button size="sm" className="studio-glow animate-pulse-glow" asChild>
+              <Link to="/booking">🎙️ Book Session</Link>
             </Button>
           </div>
 
@@ -95,8 +96,8 @@ const Header = () => {
                   <Phone className="w-4 h-4 mr-2" />
                   Call Now
                 </Button>
-                <Button size="sm" className="w-full studio-glow">
-                  🎙️ Book Session
+                <Button size="sm" className="w-full studio-glow" asChild>
+                  <Link to="/booking">🎙️ Book Session</Link>
                 </Button>
               </div>
             </nav>
