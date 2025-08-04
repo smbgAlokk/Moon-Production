@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Play, Phone, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroBackground from "@/assets/hero-background.jpg";
 
 const HeroSection = () => {
@@ -41,9 +42,12 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               className="studio-glow hover-glow text-lg px-8 py-4 min-w-[200px] transition-bounce"
+              asChild
             >
-              <Calendar className="w-5 h-5 mr-2" />
-              🎙️ Book Your Session
+              <Link to="/booking">
+                <Calendar className="w-5 h-5 mr-2" />
+                🎙️ Book Your Session
+              </Link>
             </Button>
             <Button 
               variant="outline" 
