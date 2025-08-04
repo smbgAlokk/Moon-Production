@@ -76,6 +76,7 @@ const ServicesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const IconComponent = service.icon;
+
             return (
               <Card 
                 key={index} 
@@ -94,7 +95,7 @@ const ServicesSection = () => {
                 </div>
                 
                 <CardHeader>
-                  <CardTitle className="text-xl font-heading text-foreground group-hover:text-primary transition-studio">
+                  <CardTitle className="text-l font-heading text-foreground group-hover:text-primary transition-studio">
                     {service.title}
                   </CardTitle>
                   <CardDescription className="text-muted-foreground">

@@ -285,13 +285,13 @@ const ContactSection = () => {
                     Moon Production Studio
                   </p>
                   <p className="text-sm sm:text-base text-muted-foreground">
-                    Connaught Place, New Delhi - 110001
+                    Dwarka, New Delhi - 110059
                   </p>
                   <Button
                     variant="outline"
                     className="mt-4 hover-glow text-sm sm:text-base"
                     onClick={() =>
-                      window.open("https://maps.google.com", "_blank")
+                      window.open("https://maps.google.com/J2MP+2W6", "_blank")
                     }
                   >
                     <span className="hidden sm:inline">
