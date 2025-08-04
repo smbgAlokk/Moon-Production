@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				heading: ['Bebas Neue', 'Arial Black', 'sans-serif'],
+				body: ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -61,6 +65,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				studio: {
+					glow: 'hsl(var(--studio-glow))',
+					blue: 'hsl(var(--studio-blue))',
+					dark: 'hsl(var(--studio-dark))',
+					surface: 'hsl(var(--studio-surface))'
 				}
 			},
 			borderRadius: {
