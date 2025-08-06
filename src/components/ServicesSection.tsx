@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Music, Mic, Headphones, MicVocal, Video, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import studioServices from "@/assets/studio-services.jpg";
 import podcastSetup from "@/assets/podcast-setup.jpg";
 import mixingMastering from "@/assets/mixing-mastering.jpg";
@@ -8,46 +9,52 @@ import mixingMastering from "@/assets/mixing-mastering.jpg";
 const ServicesSection = () => {
   const services = [
     {
-      icon: Music,
-      title: "🎵 Music Production",
-      description: "Bring your tracks to life with rich arrangements and modern soundscapes.",
+      icon: Mic,
+      title: "🎙️ Recording Studio",
+      description: "Professional recording sessions with industry-standard equipment.",
       image: studioServices,
-      features: ["Original Composition", "Arrangement", "Sound Design"]
-    },
-    {
-      icon: MicVocal,
-      title: "🎤 Voice Dubbing",
-      description: "Studio-quality dubbing for films, series, YouTube, and OTT content.",
-      image: podcastSetup,
-      features: ["Film Dubbing", "Commercial Voice", "Character Voices"]
+      features: ["Multi-track Recording", "Professional Microphones", "Acoustic Treatment"],
+      link: "/services/recording-studio"
     },
     {
       icon: Headphones,
       title: "🎧 Mixing & Mastering",
       description: "Finalize your sound with clarity, punch, and depth.",
       image: mixingMastering,
-      features: ["Professional Mixing", "Mastering", "Audio Restoration"]
-    },
-    {
-      icon: Mic,
-      title: "🎙️ Vocal Recording",
-      description: "Get pristine vocal takes with industry-grade gear and isolation.",
-      image: studioServices,
-      features: ["Vocal Booth", "Auto-Tune", "Vocal Editing"]
+      features: ["Professional Mixing", "Mastering", "Audio Restoration"],
+      link: "/services/mixing-mastering"
     },
     {
       icon: Video,
-      title: "🎥 Podcast & Video Shooting",
-      description: "Shoot HD podcasts, music videos, and interviews in a creative setup.",
+      title: "🎥 Podcast Production",
+      description: "Complete podcast production from recording to final delivery.",
       image: podcastSetup,
-      features: ["4K Video", "Multi-Camera", "Live Streaming"]
+      features: ["Recording & Editing", "Sound Design", "Distribution Support"],
+      link: "/services/podcast-production"
+    },
+    {
+      icon: Music,
+      title: "🎵 Music Production",
+      description: "Bring your tracks to life with rich arrangements and modern soundscapes.",
+      image: studioServices,
+      features: ["Original Composition", "Arrangement", "Sound Design"],
+      link: "/booking"
+    },
+    {
+      icon: MicVocal,
+      title: "🎤 Voice Dubbing",
+      description: "Studio-quality dubbing for films, series, YouTube, and OTT content.",
+      image: podcastSetup,
+      features: ["Film Dubbing", "Commercial Voice", "Character Voices"],
+      link: "/booking"
     },
     {
       icon: Settings,
       title: "🎚️ Vocal Chain Setup",
       description: "From mic to mix — build your vocal chain for the perfect tone.",
       image: mixingMastering,
-      features: ["Equipment Setup", "Signal Processing", "Acoustic Treatment"]
+      features: ["Equipment Setup", "Signal Processing", "Acoustic Treatment"],
+      link: "/booking"
     }
   ];
 
@@ -114,11 +121,15 @@ const ServicesSection = () => {
                   </div>
                   
                   <div className="flex gap-2">
-                    <Button className="flex-1 hover-glow transition-bounce">
-                      Book Now
+                    <Button className="flex-1 hover-glow transition-bounce" asChild>
+                      <Link to={service.link}>
+                        Book Now
+                      </Link>
                     </Button>
-                    <Button variant="outline" className="flex-1">
-                      Learn More
+                    <Button variant="outline" className="flex-1" asChild>
+                      <Link to={service.link}>
+                        Learn More
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>

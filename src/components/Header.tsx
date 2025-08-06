@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, User, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,9 +65,29 @@ const Header = () => {
               <Phone className="w-4 h-4 mr-2" />
               Call Now
             </Button>
-            <Button size="sm" className="studio-glow animate-pulse-glow" asChild>
-              <Link to="/booking">🎙️ Book Session</Link>
-            </Button>
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <Button size="sm" className="studio-glow animate-pulse-glow" asChild>
+                  <Link to="/booking">🎙️ Book Session</Link>
+                </Button>
+                <Button variant="outline" size="sm" onClick={signOut}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/auth">
+                    <User className="w-4 h-4 mr-2" />
+                    Sign In
+                  </Link>
+                </Button>
+                <Button size="sm" className="studio-glow animate-pulse-glow" asChild>
+                  <Link to="/booking">🎙️ Book Session</Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,9 +118,29 @@ const Header = () => {
                   <Phone className="w-4 h-4 mr-2" />
                   Call Now
                 </Button>
-                <Button size="sm" className="w-full studio-glow" asChild>
-                  <Link to="/booking">🎙️ Book Session</Link>
-                </Button>
+                {user ? (
+                  <>
+                    <Button size="sm" className="w-full studio-glow" asChild>
+                      <Link to="/booking">🎙️ Book Session</Link>
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-full" onClick={signOut}>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="outline" size="sm" className="w-full" asChild>
+                      <Link to="/auth">
+                        <User className="w-4 h-4 mr-2" />
+                        Sign In
+                      </Link>
+                    </Button>
+                    <Button size="sm" className="w-full studio-glow" asChild>
+                      <Link to="/booking">🎙️ Book Session</Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </nav>
           </div>
