@@ -19,6 +19,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				hero: ['Bebas Neue', 'Arial Black', 'sans-serif'],
 				heading: ['Poppins', 'system-ui', 'sans-serif'],
 				body: ['Inter', 'system-ui', 'sans-serif'],
 			},

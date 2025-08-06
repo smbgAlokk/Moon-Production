@@ -26,7 +26,7 @@ const HeroSection = () => {
       <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Main Heading */}
-          <h1 className="font-heading text-4xl sm:text-6xl lg:text-8xl mb-6 leading-tight">
+          <h1 className="font-hero text-4xl sm:text-6xl lg:text-8xl mb-6 leading-tight">
             <span className="block text-gradient">🎧 WHERE MUSIC</span>
             <span className="block text-foreground">MEETS MAGIC</span>
           </h1>
