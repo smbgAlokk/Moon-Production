@@ -68,13 +68,13 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl mb-6">
+        <div className="text-center mb-12 sm:mb-16 px-4">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-6 leading-tight">
             <span className="text-gradient">🎶 OUR STUDIO</span>
             <br />
             <span className="text-foreground">SERVICES</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             High-end production, all in one place. Professional equipment and expert guidance for every creative need.
           </p>
         </div>

@@ -26,55 +26,55 @@ const HeroSection = () => {
       <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Main Heading */}
-          <h1 className="font-hero text-4xl sm:text-6xl lg:text-8xl mb-6 leading-tight">
+          <h1 className="font-hero text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 sm:mb-6 leading-tight">
             <span className="block text-gradient">🎧 WHERE MUSIC</span>
             <span className="block text-foreground">MEETS MAGIC</span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto px-4 leading-relaxed">
             One-stop studio for Music Production, Voiceovers, Podcasts & More.
-            Transform your creative vision into reality with professional-grade equipment.
+            <span className="block mt-1">Transform your creative vision into reality with professional-grade equipment.</span>
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4">
             <Button 
               size="lg" 
-              className="studio-glow hover-glow text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 min-w-[160px] sm:min-w-[200px] transition-bounce"
+              className="studio-glow hover-glow text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-3 sm:py-4 w-full sm:w-auto max-w-[280px] sm:min-w-[200px] transition-bounce"
               asChild
             >
               <Link to="/booking">
-                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
                 <span className="hidden sm:inline">🎙️ Book Your Session</span>
-                <span className="sm:hidden">🎙️ Book Now</span>
+                <span className="sm:hidden">🎙️ Book Session</span>
               </Link>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-base sm:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-[160px] sm:min-w-[200px] glass-effect hover-glow transition-bounce"
+              className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-3 sm:py-4 w-full sm:w-auto max-w-[280px] sm:min-w-[200px] glass-effect hover-glow transition-bounce"
               onClick={() => window.open('tel:+918528934948', '_blank')}
             >
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
               <span className="hidden sm:inline">📞 Contact Us Now</span>
               <span className="sm:hidden">📞 Call Now</span>
             </Button>
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
-            <div className="glass-effect p-4 rounded-lg hover-glow transition-studio">
-              <div className="text-2xl font-heading text-primary mb-1">500+</div>
-              <div className="text-sm text-muted-foreground">Projects Completed</div>
+          <div className="grid grid-cols-1 xs:grid-cols-3 gap-3 sm:gap-6 max-w-2xl mx-auto px-4">
+            <div className="glass-effect p-3 sm:p-4 rounded-lg hover-glow transition-studio text-center">
+              <div className="text-xl sm:text-2xl font-heading text-primary mb-1">500+</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Projects Completed</div>
             </div>
-            <div className="glass-effect p-4 rounded-lg hover-glow transition-studio">
-              <div className="text-2xl font-heading text-primary mb-1">24/7</div>
-              <div className="text-sm text-muted-foreground">Studio Available</div>
+            <div className="glass-effect p-3 sm:p-4 rounded-lg hover-glow transition-studio text-center">
+              <div className="text-xl sm:text-2xl font-heading text-primary mb-1">24/7</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Studio Available</div>
             </div>
-            <div className="glass-effect p-4 rounded-lg hover-glow transition-studio">
-              <div className="text-2xl font-heading text-primary mb-1">Pro</div>
-              <div className="text-sm text-muted-foreground">Grade Equipment</div>
+            <div className="glass-effect p-3 sm:p-4 rounded-lg hover-glow transition-studio text-center">
+              <div className="text-xl sm:text-2xl font-heading text-primary mb-1">Pro</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Grade Equipment</div>
             </div>
           </div>
         </div>

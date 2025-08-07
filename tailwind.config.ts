@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			screens: {
+				'xs': '475px',
+			},
 			fontFamily: {
 				hero: ['Bebas Neue', 'Arial Black', 'sans-serif'],
 				heading: ['Poppins', 'system-ui', 'sans-serif'],

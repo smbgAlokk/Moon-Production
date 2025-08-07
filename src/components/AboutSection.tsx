@@ -43,12 +43,12 @@ const AboutSection = () => {
           {/* Content Side */}
           <div className="space-y-8">
             <div>
-              <h2 className="font-heading text-4xl sm:text-5xl mb-6">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 leading-tight">
                 <span className="text-gradient">About</span>
                 <br />
                 <span className="text-foreground">MOON PRODUCTION</span>
               </h2>
-              <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 <p>
                   Moon Production is not just a studio — it's a space where creativity flows.
                   We're based in Delhi and offer end-to-end audio and visual production: from vocal recording 

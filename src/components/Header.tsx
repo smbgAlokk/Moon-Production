@@ -36,8 +36,8 @@ const Header = () => {
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center studio-glow">
               <span className="text-primary-foreground font-heading text-xl">🌙</span>
             </div>
-            <div>
-              <h1 className="font-heading text-xl md:text-2xl text-gradient">
+            <div className="min-w-0">
+              <h1 className="font-heading text-base sm:text-lg md:text-xl lg:text-2xl text-gradient truncate">
                 MOON PRODUCTION
               </h1>
               <p className="text-xs text-muted-foreground hidden sm:block">
@@ -60,31 +60,40 @@ const Header = () => {
           </nav>
 
           {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm" className="hover-glow">
-              <Phone className="w-4 h-4 mr-2" />
-              Call Now
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-4">
+            <Button variant="outline" size="sm" className="hover-glow text-xs xl:text-sm px-2 xl:px-3">
+              <Phone className="w-3 h-3 xl:w-4 xl:h-4 mr-1 xl:mr-2" />
+              <span className="hidden xl:inline">Call Now</span>
+              <span className="xl:hidden">Call</span>
             </Button>
             {user ? (
-              <div className="flex items-center space-x-2">
-                <Button size="sm" className="studio-glow animate-pulse-glow" asChild>
-                  <Link to="/booking">🎙️ Book Session</Link>
+              <div className="flex items-center space-x-1 xl:space-x-2">
+                <Button size="sm" className="studio-glow animate-pulse-glow text-xs xl:text-sm px-2 xl:px-3" asChild>
+                  <Link to="/booking">
+                    <span className="hidden xl:inline">🎙️ Book Session</span>
+                    <span className="xl:hidden">🎙️ Book</span>
+                  </Link>
                 </Button>
-                <Button variant="outline" size="sm" onClick={signOut}>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
+                <Button variant="outline" size="sm" onClick={signOut} className="text-xs xl:text-sm px-2 xl:px-3">
+                  <LogOut className="w-3 h-3 xl:w-4 xl:h-4 mr-1 xl:mr-2" />
+                  <span className="hidden xl:inline">Sign Out</span>
+                  <span className="xl:hidden">Out</span>
                 </Button>
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm" asChild>
+              <div className="flex items-center space-x-1 xl:space-x-2">
+                <Button variant="outline" size="sm" asChild className="text-xs xl:text-sm px-2 xl:px-3">
                   <Link to="/auth">
-                    <User className="w-4 h-4 mr-2" />
-                    Sign In
+                    <User className="w-3 h-3 xl:w-4 xl:h-4 mr-1 xl:mr-2" />
+                    <span className="hidden xl:inline">Sign In</span>
+                    <span className="xl:hidden">In</span>
                   </Link>
                 </Button>
-                <Button size="sm" className="studio-glow animate-pulse-glow" asChild>
-                  <Link to="/booking">🎙️ Book Session</Link>
+                <Button size="sm" className="studio-glow animate-pulse-glow text-xs xl:text-sm px-2 xl:px-3" asChild>
+                  <Link to="/booking">
+                    <span className="hidden xl:inline">🎙️ Book Session</span>
+                    <span className="xl:hidden">🎙️ Book</span>
+                  </Link>
                 </Button>
               </div>
             )}
