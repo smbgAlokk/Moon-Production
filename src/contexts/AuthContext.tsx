@@ -51,24 +51,68 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, fullName: string, mobileNumber: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
-    try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: redirectUrl,
-          data: {
-            full_name: fullName,
-            mobile_number: mobileNumber
+    const attemptSignUp = async (retryCount = 0): Promise<{ error: any }> => {
+      try {
+        // Add a small delay to prevent rate limiting
+        if (retryCount > 0) {
+          await new Promise(resolve => setTimeout(resolve, 1000 * retryCount)); // Exponential backoff
+        } else {
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+        
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: redirectUrl,
+            data: {
+              full_name: fullName,
+              mobile_number: mobileNumber
+            }
+          }
+        });
+        
+        if (error) {
+          // Check for rate limiting error
+          if ((error.message.includes('429') || error.message.includes('rate limit') || error.message.includes('too many requests')) && retryCount < 2) {
+            console.log(`Rate limiting detected, retrying... (attempt ${retryCount + 1})`);
+            return attemptSignUp(retryCount + 1);
+          }
+          
+          console.error('Rate limiting error:', error);
+          return { 
+            error: { 
+              message: 'Too many sign-up attempts. Please wait a moment before trying again.' 
+            } 
+          };
+        }
+        return { error };
+      } catch (error) {
+        console.error('Sign up error:', error);
+        
+        // Handle network or other errors
+        if (error instanceof Error) {
+          if (error.message.includes('429') || error.message.includes('rate limit')) {
+            return { 
+              error: { 
+                message: 'Too many sign-up attempts. Please wait a moment before trying again.' 
+              } 
+            };
           }
         }
-      });
-      
-      if (error) {
-        return { error };
+        
+        return { 
+          error: { 
+            message: 'An unexpected error occurred during sign up. Please try again.' 
+          } 
+        };
       }
-
-      // If signup is successful, update the profile with mobile number
+    };
+    
+    const result = await attemptSignUp();
+    
+    // If signup is successful, update the profile with mobile number
+    if (!result.error) {
       const { data: { user: newUser } } = await supabase.auth.getUser();
       if (newUser) {
         const { error: profileError } = await supabase
@@ -84,16 +128,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error('Profile update error:', profileError);
         }
       }
-      
-      return { error: null };
-    } catch (error) {
-      console.error('Sign up error:', error);
-      return { 
-        error: { 
-          message: 'An unexpected error occurred during sign up. Please try again.' 
-        } 
-      };
     }
+    
+    return result;
   };
 
   const signIn = async (email: string, password: string) => {

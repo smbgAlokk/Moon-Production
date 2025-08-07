@@ -253,11 +253,24 @@ const AuthPage = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Background Effects */}
+      {/* Enhanced Background Effects */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-1/3 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"></div>
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 animate-pulse"></div>
+        
+        {/* Floating orbs with different animations */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '6s' }}></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '8s', animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '7s', animationDelay: '4s' }}></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '9s', animationDelay: '6s' }}></div>
+        
+        {/* Central glow effect */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-full blur-3xl animate-pulse"></div>
+        
+        {/* Animated grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
+        </div>
       </div>
 
       {/* Alert Message Overlay */}
@@ -323,79 +336,93 @@ const AuthPage = () => {
 
       <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-screen">
-          <div className="w-full max-w-md space-y-8">
-            {/* Header */}
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center studio-glow">
-                  <Music className="h-6 w-6 text-primary-foreground" />
+          <div className="w-full max-w-md space-y-8 animate-fade-in">
+            {/* Enhanced Header */}
+            <div className="text-center space-y-4 animate-slide-down">
+              <div className="flex items-center justify-center space-x-3 mb-6 group">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center studio-glow animate-pulse group-hover:scale-110 transition-transform duration-300">
+                  <Music className="h-8 w-8 text-primary-foreground animate-bounce" />
                 </div>
-                <div>
-                  <h1 className="text-3xl font-heading text-gradient">MOON PRODUCTION</h1>
-                  <p className="text-sm text-muted-foreground">Where Music Meets Magic</p>
+                <div className="animate-slide-right">
+                  <h1 className="text-4xl font-heading text-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                    MOON PRODUCTION
+                  </h1>
+                  <p className="text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                    Where Music Meets Magic ✨
+                  </p>
                 </div>
               </div>
               
               <Link 
                 to="/"
-                className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
+                className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105 mb-6 group"
               >
-                <ArrowLeft className="h-4 w-4 mr-2" />
+                <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                 Back to Home
               </Link>
             </div>
 
-            {/* Auth Card */}
-            <Card className="glass-effect border-primary/20 shadow-2xl">
-              <CardHeader className="text-center pb-6">
-                <CardTitle className="text-2xl font-heading text-foreground">
+            {/* Enhanced Auth Card */}
+            <Card className="glass-effect border-primary/20 shadow-2xl backdrop-blur-xl bg-white/5 animate-slide-up group hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
+              <CardHeader className="text-center pb-6 animate-fade-in">
+                <CardTitle className="text-2xl font-heading text-foreground bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Welcome to Moon Production
                 </CardTitle>
-                <CardDescription className="text-muted-foreground">
+                <CardDescription className="text-muted-foreground animate-fade-in" style={{ animationDelay: '0.3s' }}>
                   Sign in to your account or create a new one to get started
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-6">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 mb-8">
-                    <TabsTrigger value="signin" className="text-sm font-medium">Sign In</TabsTrigger>
-                    <TabsTrigger value="signup" className="text-sm font-medium">Sign Up</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-2 mb-8 bg-background/50 backdrop-blur-sm border border-primary/20">
+                    <TabsTrigger 
+                      value="signin" 
+                      className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg"
+                    >
+                      Sign In
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="signup" 
+                      className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg"
+                    >
+                      Sign Up
+                    </TabsTrigger>
                   </TabsList>
                   
-                  <TabsContent value="signin" className="space-y-6">
+                  <TabsContent value="signin" className="space-y-6 animate-fade-in">
                     <form ref={signInFormRef} onSubmit={handleSignIn} className="space-y-4">
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.1s' }}>
                         <Label htmlFor="signin-email" className="text-sm font-medium">Email Address</Label>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signin-email"
                             name="email" 
                             type="email" 
                             placeholder="Enter your email"
-                            className="pl-10 glass-effect"
+                            className="pl-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                         </div>
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.2s' }}>
                         <Label htmlFor="signin-password" className="text-sm font-medium">Password</Label>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signin-password"
                             name="password" 
                             type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
-                            className="pl-10 pr-10 glass-effect"
+                            className="pl-10 pr-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors duration-300"
                             disabled={isLoading}
                           >
                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -404,7 +431,7 @@ const AuthPage = () => {
                       </div>
                       <Button 
                         type="submit" 
-                        className="w-full studio-glow hover-glow text-base py-3" 
+                        className="w-full studio-glow hover-glow text-base py-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg" 
                         disabled={isLoading}
                       >
                         {isLoading ? (
@@ -417,100 +444,100 @@ const AuthPage = () => {
                         )}
                       </Button>
                       {isLoading && (
-                        <p className="text-xs text-muted-foreground text-center">
+                        <p className="text-xs text-muted-foreground text-center animate-pulse">
                           Please wait while we authenticate your account...
                         </p>
                       )}
                     </form>
                   </TabsContent>
                   
-                  <TabsContent value="signup" className="space-y-6">
+                  <TabsContent value="signup" className="space-y-6 animate-fade-in">
                     <form ref={signUpFormRef} onSubmit={handleSignUp} className="space-y-4">
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.1s' }}>
                         <Label htmlFor="signup-name" className="text-sm font-medium">Full Name</Label>
-                        <div className="relative">
-                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signup-name"
                             name="fullName" 
                             type="text" 
                             placeholder="Enter your full name"
-                            className="pl-10 glass-effect"
+                            className="pl-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                         </div>
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.2s' }}>
                         <Label htmlFor="signup-mobile" className="text-sm font-medium">Mobile Number</Label>
-                        <div className="relative">
-                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signup-mobile"
                             name="mobileNumber" 
                             type="tel" 
                             placeholder="+91 XXXXXXXXXX"
-                            className="pl-10 glass-effect"
+                            className="pl-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                         </div>
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.3s' }}>
                         <Label htmlFor="signup-email" className="text-sm font-medium">Email Address</Label>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signup-email"
                             name="email" 
                             type="email" 
                             placeholder="Enter your email"
-                            className="pl-10 glass-effect"
+                            className="pl-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                         </div>
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.4s' }}>
                         <Label htmlFor="signup-password" className="text-sm font-medium">Password</Label>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signup-password"
                             name="password" 
                             type={showSignUpPassword ? "text" : "password"}
                             placeholder="Create a password (min 6 characters)"
-                            className="pl-10 pr-10 glass-effect"
+                            className="pl-10 pr-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                           <button
                             type="button"
                             onClick={() => setShowSignUpPassword(!showSignUpPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors duration-300"
                             disabled={isLoading}
                           >
                             {showSignUpPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                           </button>
                         </div>
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.5s' }}>
                         <Label htmlFor="signup-confirm-password" className="text-sm font-medium">Confirm Password</Label>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <div className="relative group">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                           <Input 
                             id="signup-confirm-password"
                             name="confirmPassword" 
                             type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirm your password"
-                            className="pl-10 pr-10 glass-effect"
+                            className="pl-10 pr-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
                             required 
                             disabled={isLoading}
                           />
                           <button
                             type="button"
                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors duration-300"
                             disabled={isLoading}
                           >
                             {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -519,7 +546,7 @@ const AuthPage = () => {
                       </div>
                       <Button 
                         type="submit" 
-                        className="w-full studio-glow hover-glow text-base py-3" 
+                        className="w-full studio-glow hover-glow text-base py-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg" 
                         disabled={isLoading}
                       >
                         {isLoading ? (
@@ -532,7 +559,7 @@ const AuthPage = () => {
                         )}
                       </Button>
                       {isLoading && (
-                        <p className="text-xs text-muted-foreground text-center">
+                        <p className="text-xs text-muted-foreground text-center animate-pulse">
                           Please wait while we create your account...
                         </p>
                       )}
@@ -542,18 +569,18 @@ const AuthPage = () => {
               </CardContent>
             </Card>
 
-            {/* Additional Info */}
-            <div className="text-center space-y-4">
+            {/* Enhanced Additional Info */}
+            <div className="text-center space-y-4 animate-fade-in" style={{ animationDelay: '0.8s' }}>
               <p className="text-sm text-muted-foreground">
                 By signing up, you agree to our{" "}
-                <a href="#" className="text-primary hover:underline">Terms of Service</a> and{" "}
-                <a href="#" className="text-primary hover:underline">Privacy Policy</a>
+                <a href="#" className="text-primary hover:underline transition-colors duration-300 hover:text-primary/80">Terms of Service</a> and{" "}
+                <a href="#" className="text-primary hover:underline transition-colors duration-300 hover:text-primary/80">Privacy Policy</a>
               </p>
               <div className="flex items-center justify-center space-x-4 text-sm text-muted-foreground">
                 <span>Need help?</span>
-                <a href="tel:+918528934948" className="text-primary hover:underline">📞 Call Us</a>
+                <a href="tel:+918528934948" className="text-primary hover:underline transition-colors duration-300 hover:text-primary/80 hover:scale-105 inline-block">📞 Call Us</a>
                 <span>or</span>
-                <a href="https://wa.me/918528934948" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">📱 WhatsApp</a>
+                <a href="https://wa.me/918528934948" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition-colors duration-300 hover:text-primary/80 hover:scale-105 inline-block">📱 WhatsApp</a>
               </div>
             </div>
           </div>
