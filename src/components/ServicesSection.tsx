@@ -38,7 +38,7 @@ const ServicesSection = () => {
       description: "Bring your tracks to life with rich arrangements and modern soundscapes.",
       image: studioServices,
       features: ["Original Composition", "Arrangement", "Sound Design"],
-      link: "/booking"
+      link: "/services/music-production"
     },
     {
       icon: MicVocal,
@@ -46,7 +46,7 @@ const ServicesSection = () => {
       description: "Studio-quality dubbing for films, series, YouTube, and OTT content.",
       image: podcastSetup,
       features: ["Film Dubbing", "Commercial Voice", "Character Voices"],
-      link: "/booking"
+      link: "/services/voice-dubbing"
     },
     {
       icon: Settings,
@@ -54,7 +54,7 @@ const ServicesSection = () => {
       description: "From mic to mix — build your vocal chain for the perfect tone.",
       image: mixingMastering,
       features: ["Equipment Setup", "Signal Processing", "Acoustic Treatment"],
-      link: "/booking"
+      link: "/services/vocal-chain-setup"
     }
   ];
 
