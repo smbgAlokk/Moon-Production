@@ -51,61 +51,110 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, fullName: string, mobileNumber: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          full_name: fullName,
-          mobile_number: mobileNumber
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            full_name: fullName,
+            mobile_number: mobileNumber
+          }
+        }
+      });
+      
+      if (error) {
+        return { error };
+      }
+
+      // If signup is successful, update the profile with mobile number
+      const { data: { user: newUser } } = await supabase.auth.getUser();
+      if (newUser) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .upsert({
+            user_id: newUser.id,
+            full_name: fullName,
+            phone: mobileNumber,
+            updated_at: new Date().toISOString()
+          });
+        
+        if (profileError) {
+          console.error('Profile update error:', profileError);
         }
       }
-    });
-    
-    // Do not toast here; let the calling page (AuthPage) handle all user-facing alerts for sign-up
-    return { error };
+      
+      return { error: null };
+    } catch (error) {
+      console.error('Sign up error:', error);
+      return { 
+        error: { 
+          message: 'An unexpected error occurred during sign up. Please try again.' 
+        } 
+      };
+    }
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    
-    if (error) {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        toast({
+          title: "❌ Sign In Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "🎵 Welcome Back!",
+          description: "You have successfully signed in to Moon Production.",
+        });
+      }
+      
+      return { error };
+    } catch (error) {
+      console.error('Sign in error:', error);
       toast({
         title: "❌ Sign In Failed",
-        description: error.message,
+        description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "🎵 Welcome Back!",
-        description: "You have successfully signed in to Moon Production.",
-      });
+      return { error };
     }
-    
-    return { error };
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    
-    if (error) {
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        toast({
+          title: "❌ Sign Out Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "👋 See You Soon!",
+          description: "You have been successfully signed out.",
+        });
+      }
+      
+      return { error };
+    } catch (error) {
+      console.error('Sign out error:', error);
       toast({
         title: "❌ Sign Out Failed",
-        description: error.message,
+        description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "👋 See You Soon!",
-        description: "You have been successfully signed out.",
-      });
+      return { error };
     }
-    
-    return { error };
   };
 
   const value = {

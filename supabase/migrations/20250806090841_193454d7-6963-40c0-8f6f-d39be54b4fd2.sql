@@ -25,3 +25,25 @@ BEGIN
   RETURN NEW;
 END;
 $$;
+
+-- Update the handle_new_user function to properly capture mobile number
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = ''
+AS $$
+BEGIN
+  INSERT INTO public.profiles (user_id, full_name, phone)
+  VALUES (
+    new.id, 
+    new.raw_user_meta_data ->> 'full_name',
+    new.raw_user_meta_data ->> 'mobile_number'
+  );
+  
+  INSERT INTO public.user_roles (user_id, role)
+  VALUES (new.id, 'user');
+  
+  RETURN new;
+END;
+$$;
