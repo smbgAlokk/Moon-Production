@@ -57,7 +57,7 @@ const HeroSection = () => {
               onClick={() => window.open('tel:+918528934948', '_blank')}
             >
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
-              <span className="hidden sm:inline">📞 Contact Us Now</span>
+              <span className="hidden sm:inline">📞 Call Primary</span>
               <span className="sm:hidden">📞 Call Now</span>
             </Button>
           </div>

@@ -50,10 +50,17 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Phone,
-      title: "Call Us",
+      title: "Call Us (Primary)",
       info: "+91 8528934948",
       description: "Available 9 AM - 9 PM",
       action: "tel:+918528934948",
+    },
+    {
+      icon: Phone,
+      title: "Call Us (Secondary)",
+      info: "+91 6392772903",
+      description: "Available 9 AM - 9 PM",
+      action: "tel:+916392772903",
     },
     {
       icon: Mail,
@@ -267,7 +274,7 @@ const ContactSection = () => {
                   className="w-full studio-glow animate-pulse-glow text-sm sm:text-base"
                   onClick={() => window.open("tel:+918528934948", "_blank")}
                 >
-                  📞 Emergency Line
+                  📞 Emergency Line (Primary)
                 </Button>
               </CardContent>
             </Card>

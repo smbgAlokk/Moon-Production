@@ -292,7 +292,11 @@ const BookingSection = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Have questions about our services or booking?
                 </p>
-                <Button variant="outline" className="w-full hover-glow">
+                <Button 
+                  variant="outline" 
+                  className="w-full hover-glow"
+                  onClick={() => window.open('https://wa.me/918528934948', '_blank')}
+                >
                   📱 WhatsApp Us
                 </Button>
               </CardContent>

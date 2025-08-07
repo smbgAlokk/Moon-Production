@@ -167,7 +167,7 @@ const BookingPage = () => {
                       id="phone"
                       value={clientPhone}
                       onChange={(e) => setClientPhone(e.target.value)}
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 8528934948"
                       className="glass-effect mt-1"
                     />
                   </div>
@@ -371,7 +371,7 @@ const BookingPage = () => {
                       className="w-full glass-effect hover-glow"
                       asChild
                     >
-                      <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+                      <a href="https://wa.me/918528934948" target="_blank" rel="noopener noreferrer">
                         <MessageCircle className="w-4 h-4 mr-2" />
                         WhatsApp Us
                       </a>

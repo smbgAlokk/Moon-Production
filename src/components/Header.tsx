@@ -72,7 +72,12 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-2 xl:space-x-4">
-            <Button variant="outline" size="sm" className="hover-glow text-xs xl:text-sm px-2 xl:px-3">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="hover-glow text-xs xl:text-sm px-2 xl:px-3"
+              onClick={() => window.open('tel:+918528934948', '_blank')}
+            >
               <Phone className="w-3 h-3 xl:w-4 xl:h-4 mr-1 xl:mr-2" />
               <span className="hidden xl:inline">Call Now</span>
               <span className="xl:hidden">Call</span>
@@ -145,7 +150,12 @@ const Header = () => {
                 )
               ))}
               <div className="flex flex-col space-y-2 pt-4 border-t border-border/50">
-                <Button variant="outline" size="sm" className="w-full">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => window.open('tel:+918528934948', '_blank')}
+                >
                   <Phone className="w-4 h-4 mr-2" />
                   Call Now
                 </Button>

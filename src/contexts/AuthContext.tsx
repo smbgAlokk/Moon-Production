@@ -7,7 +7,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   isLoading: boolean;
-  signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, fullName: string, mobileNumber: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
 }
@@ -48,7 +48,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, fullName: string) => {
+  const signUp = async (email: string, password: string, fullName: string, mobileNumber: string) => {
     const redirectUrl = `${window.location.origin}/`;
     
     const { error } = await supabase.auth.signUp({
@@ -57,24 +57,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       options: {
         emailRedirectTo: redirectUrl,
         data: {
-          full_name: fullName
+          full_name: fullName,
+          mobile_number: mobileNumber
         }
       }
     });
     
-    if (error) {
-      toast({
-        title: "Sign up failed",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Sign up successful!",
-        description: "Please check your email to confirm your account.",
-      });
-    }
-    
+    // Do not toast here; let the calling page (AuthPage) handle all user-facing alerts for sign-up
     return { error };
   };
 
@@ -86,14 +75,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     if (error) {
       toast({
-        title: "Sign in failed",
+        title: "❌ Sign In Failed",
         description: error.message,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Welcome back!",
-        description: "You have successfully signed in.",
+        title: "🎵 Welcome Back!",
+        description: "You have successfully signed in to Moon Production.",
       });
     }
     
@@ -105,13 +94,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     if (error) {
       toast({
-        title: "Sign out failed",
+        title: "❌ Sign Out Failed",
         description: error.message,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Signed out",
+        title: "👋 See You Soon!",
         description: "You have been successfully signed out.",
       });
     }

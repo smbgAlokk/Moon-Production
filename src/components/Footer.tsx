@@ -61,7 +61,11 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 mr-2 text-primary" />
-                +91 9876543210
+                +91 8528934948 (Primary)
+              </div>
+              <div className="flex items-center text-sm text-muted-foreground">
+                <Phone className="w-4 h-4 mr-2 text-primary" />
+                +91 6392772903 (Secondary)
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Mail className="w-4 h-4 mr-2 text-primary" />
@@ -178,7 +182,7 @@ const Footer = () => {
               className="studio-glow animate-pulse-glow whitespace-nowrap"
               onClick={() => window.open('tel:+918528934948', '_blank')}
             >
-              📞 Emergency Booking
+              📞 Emergency Booking (Primary)
             </Button>
           </div>
         </div>
