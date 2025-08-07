@@ -143,8 +143,11 @@ const ServicesSection = () => {
           <Button 
             size="lg" 
             className="studio-glow text-lg px-8 py-4 animate-pulse-glow"
+            asChild
           >
-            View All Services & Pricing
+            <Link to="/services-pricing">
+              View All Services & Pricing
+            </Link>
           </Button>
         </div>
       </div>

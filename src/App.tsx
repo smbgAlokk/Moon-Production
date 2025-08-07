@@ -15,6 +15,7 @@ import PodcastProductionPage from "./pages/services/PodcastProductionPage";
 import MusicProductionPage from "./pages/services/MusicProductionPage";
 import VoiceDubbingPage from "./pages/services/VoiceDubbingPage";
 import VocalChainSetupPage from "./pages/services/VocalChainSetupPage";
+import ServicesPricingPage from "./pages/ServicesPricingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/services/music-production" element={<MusicProductionPage />} />
             <Route path="/services/voice-dubbing" element={<VoiceDubbingPage />} />
             <Route path="/services/vocal-chain-setup" element={<VocalChainSetupPage />} />
+            <Route path="/services-pricing" element={<ServicesPricingPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
