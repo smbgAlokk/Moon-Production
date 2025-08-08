@@ -41,11 +41,12 @@ const AuthPage = () => {
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   
-  const { signIn, signUp, user, signInWithGoogle, sendPhoneOtp, verifyPhoneOtp } = useAuth();
+  const { signIn, signUp, user, sendPhoneOtp, verifyPhoneOtp } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect if already authenticated
+  // Set title and redirect if already authenticated
   useEffect(() => {
+    document.title = user ? "Moon Production" : "Sign in | Moon Production";
     if (user) {
       navigate("/");
     }
@@ -298,16 +299,16 @@ const AuthPage = () => {
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 z-0">
         {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-studio-dark via-primary/20 to-studio-dark animate-fade-in"></div>
         
         {/* Floating orbs with different animations */}
-        <div className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '6s' }}></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '8s', animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '7s', animationDelay: '4s' }}></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-bounce" style={{ animationDuration: '9s', animationDelay: '6s' }}></div>
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float animate-pulse-glow" style={{ animationDuration: '6s' }}></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float animate-pulse-glow" style={{ animationDuration: '8s', animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDuration: '7s', animationDelay: '4s' }}></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-float" style={{ animationDuration: '9s', animationDelay: '6s' }}></div>
         
         {/* Central glow effect */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-full blur-3xl animate-pulse-glow"></div>
         
         {/* Animated grid pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -494,14 +495,11 @@ const AuthPage = () => {
                     <div className="relative py-4">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
                         <span className="h-px flex-1 bg-border" />
-                        <span>Or continue with</span>
+                        <span>Or sign in with OTP</span>
                         <span className="h-px flex-1 bg-border" />
                       </div>
                     </div>
                     <div className="space-y-4">
-                      <Button type="button" onClick={signInWithGoogle} variant="outline" className="w-full">
-                        Continue with Google
-                      </Button>
                       <div className="space-y-2">
                         <Label className="text-sm font-medium">Mobile number (E.164 format, e.g., +919876543210)</Label>
                         <div className="flex gap-2">
@@ -659,14 +657,11 @@ const AuthPage = () => {
                       <div className="relative py-4">
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <span className="h-px flex-1 bg-border" />
-                          <span>Or sign up with</span>
+                          <span>Or sign up with OTP</span>
                           <span className="h-px flex-1 bg-border" />
                         </div>
                       </div>
                       <div className="space-y-4">
-                        <Button type="button" onClick={signInWithGoogle} variant="outline" className="w-full">
-                          Continue with Google
-                        </Button>
                         <div className="space-y-2">
                           <Label className="text-sm font-medium">Mobile number (E.164 format, e.g., +919876543210)</Label>
                           <div className="flex gap-2">
