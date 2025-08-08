@@ -10,6 +10,9 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string, mobileNumber: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
+  signInWithGoogle: () => Promise<{ error: any }>;
+  sendPhoneOtp: (phone: string) => Promise<{ error: any }>;
+  verifyPhoneOtp: (phone: string, token: string) => Promise<{ error: any }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -111,26 +114,97 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     const result = await attemptSignUp();
     
-    // If signup is successful, update the profile with mobile number
-    if (!result.error) {
-      const { data: { user: newUser } } = await supabase.auth.getUser();
-      if (newUser) {
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .upsert({
-            user_id: newUser.id,
-            full_name: fullName,
-            phone: mobileNumber,
-            updated_at: new Date().toISOString()
-          });
-        
-        if (profileError) {
-          console.error('Profile update error:', profileError);
-        }
-      }
-    }
+    // Profile is auto-created via DB trigger (public.handle_new_user). No manual upsert here.
     
     return result;
+  };
+
+  const signInWithGoogle = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
+      if (error) {
+        toast({
+          title: "❌ Google Sign In Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+      return { error };
+    } catch (error) {
+      console.error('Google sign in error:', error);
+      toast({
+        title: "❌ Google Sign In Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+      return { error };
+    }
+  };
+
+  const sendPhoneOtp = async (phone: string) => {
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        phone,
+        options: { channel: 'sms' },
+      });
+      if (error) {
+        toast({
+          title: "❌ OTP Send Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "📲 OTP Sent",
+          description: "We sent a 6-digit code via SMS.",
+        });
+      }
+      return { error };
+    } catch (error) {
+      console.error('Send OTP error:', error);
+      toast({
+        title: "❌ OTP Send Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+      return { error };
+    }
+  };
+
+  const verifyPhoneOtp = async (phone: string, token: string) => {
+    try {
+      const { error } = await supabase.auth.verifyOtp({
+        phone,
+        token,
+        type: 'sms',
+      });
+      if (error) {
+        toast({
+          title: "❌ OTP Verification Failed",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "✅ Verified",
+          description: "Phone number verified successfully.",
+        });
+      }
+      return { error };
+    } catch (error) {
+      console.error('Verify OTP error:', error);
+      toast({
+        title: "❌ OTP Verification Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+      return { error };
+    }
   };
 
   const signIn = async (email: string, password: string) => {
@@ -201,6 +275,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signUp,
     signIn,
     signOut,
+    signInWithGoogle,
+    sendPhoneOtp,
+    verifyPhoneOtp,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

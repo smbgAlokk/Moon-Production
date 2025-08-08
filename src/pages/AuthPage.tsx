@@ -9,7 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Music, ArrowLeft, Eye, EyeOff, Phone, Mail, User, Lock, CheckCircle, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 const AuthPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +31,17 @@ const AuthPage = () => {
   const signInFormRef = useRef<HTMLFormElement>(null);
   const signUpFormRef = useRef<HTMLFormElement>(null);
   
-  const { signIn, signUp, user } = useAuth();
+  // Phone OTP states
+  const [signinPhone, setSigninPhone] = useState("");
+  const [signinOtp, setSigninOtp] = useState("");
+  const [signinStep, setSigninStep] = useState<'idle' | 'codeSent'>("idle");
+  const [signupPhone, setSignupPhone] = useState("");
+  const [signupOtp, setSignupOtp] = useState("");
+  const [signupStep, setSignupStep] = useState<'idle' | 'codeSent'>("idle");
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+  
+  const { signIn, signUp, user, signInWithGoogle, sendPhoneOtp, verifyPhoneOtp } = useAuth();
   const navigate = useNavigate();
 
   // Redirect if already authenticated
@@ -251,6 +261,38 @@ const AuthPage = () => {
     }
   };
 
+  const handleSendOtp = async (mode: 'signin' | 'signup') => {
+    const phone = mode === 'signin' ? signinPhone : signupPhone;
+    if (!phone || !phone.startsWith('+')) {
+      showAlert('error', '❌ Invalid Phone', 'Enter phone in international format, e.g., +919876543210.');
+      return;
+    }
+    setIsSendingOtp(true);
+    const { error } = await sendPhoneOtp(phone);
+    setIsSendingOtp(false);
+    if (!error) {
+      if (mode === 'signin') setSigninStep('codeSent');
+      else setSignupStep('codeSent');
+      showAlert('info', '📲 OTP Sent', 'We sent a 6-digit code via SMS.');
+    }
+  };
+
+  const handleVerifyOtp = async (mode: 'signin' | 'signup') => {
+    const phone = mode === 'signin' ? signinPhone : signupPhone;
+    const token = mode === 'signin' ? signinOtp : signupOtp;
+    if (token.length !== 6) {
+      showAlert('error', '❌ Invalid OTP', 'Please enter the 6-digit code.');
+      return;
+    }
+    setIsVerifyingOtp(true);
+    const { error } = await verifyPhoneOtp(phone, token);
+    setIsVerifyingOtp(false);
+    if (!error) {
+      showAlert('success', '✅ Verified', 'Signed in successfully.');
+      setTimeout(() => navigate('/'), 800);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Enhanced Background Effects */}
@@ -449,6 +491,56 @@ const AuthPage = () => {
                         </p>
                       )}
                     </form>
+                    <div className="relative py-4">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span className="h-px flex-1 bg-border" />
+                        <span>Or continue with</span>
+                        <span className="h-px flex-1 bg-border" />
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <Button type="button" onClick={signInWithGoogle} variant="outline" className="w-full">
+                        Continue with Google
+                      </Button>
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium">Mobile number (E.164 format, e.g., +919876543210)</Label>
+                        <div className="flex gap-2">
+                          <Input
+                            type="tel"
+                            placeholder="+91 XXXXXXXXXX"
+                            value={signinPhone}
+                            onChange={(e) => setSigninPhone(e.target.value)}
+                            disabled={isSendingOtp || isVerifyingOtp}
+                            className="glass-effect border-primary/20"
+                          />
+                          <Button
+                            type="button"
+                            onClick={() => handleSendOtp('signin')}
+                            disabled={isSendingOtp || signinStep === 'codeSent'}
+                          >
+                            {isSendingOtp ? 'Sending...' : 'Send OTP'}
+                          </Button>
+                        </div>
+                        {signinStep === 'codeSent' && (
+                          <div className="space-y-2">
+                            <Label className="text-sm font-medium">Enter 6-digit OTP</Label>
+                            <InputOTP maxLength={6} value={signinOtp} onChange={setSigninOtp} className="w-full">
+                              <InputOTPGroup>
+                                {[0,1,2,3,4,5].map((i) => (<InputOTPSlot key={i} index={i} />))}
+                              </InputOTPGroup>
+                            </InputOTP>
+                            <Button
+                              type="button"
+                              onClick={() => handleVerifyOtp('signin')}
+                              className="w-full"
+                              disabled={isVerifyingOtp || signinOtp.length !== 6}
+                            >
+                              {isVerifyingOtp ? 'Verifying...' : 'Verify & Continue'}
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </TabsContent>
                   
                   <TabsContent value="signup" className="space-y-6 animate-fade-in">
@@ -563,8 +655,58 @@ const AuthPage = () => {
                           Please wait while we create your account...
                         </p>
                       )}
-                    </form>
-                  </TabsContent>
+                      </form>
+                      <div className="relative py-4">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <span className="h-px flex-1 bg-border" />
+                          <span>Or sign up with</span>
+                          <span className="h-px flex-1 bg-border" />
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <Button type="button" onClick={signInWithGoogle} variant="outline" className="w-full">
+                          Continue with Google
+                        </Button>
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">Mobile number (E.164 format, e.g., +919876543210)</Label>
+                          <div className="flex gap-2">
+                            <Input
+                              type="tel"
+                              placeholder="+91 XXXXXXXXXX"
+                              value={signupPhone}
+                              onChange={(e) => setSignupPhone(e.target.value)}
+                              disabled={isSendingOtp || isVerifyingOtp}
+                              className="glass-effect border-primary/20"
+                            />
+                            <Button
+                              type="button"
+                              onClick={() => handleSendOtp('signup')}
+                              disabled={isSendingOtp || signupStep === 'codeSent'}
+                            >
+                              {isSendingOtp ? 'Sending...' : 'Send OTP'}
+                            </Button>
+                          </div>
+                          {signupStep === 'codeSent' && (
+                            <div className="space-y-2">
+                              <Label className="text-sm font-medium">Enter 6-digit OTP</Label>
+                              <InputOTP maxLength={6} value={signupOtp} onChange={setSignupOtp} className="w-full">
+                                <InputOTPGroup>
+                                  {[0,1,2,3,4,5].map((i) => (<InputOTPSlot key={i} index={i} />))}
+                                </InputOTPGroup>
+                              </InputOTP>
+                              <Button
+                                type="button"
+                                onClick={() => handleVerifyOtp('signup')}
+                                className="w-full"
+                                disabled={isVerifyingOtp || signupOtp.length !== 6}
+                              >
+                                {isVerifyingOtp ? 'Verifying...' : 'Verify & Create Account'}
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </TabsContent>
                 </Tabs>
               </CardContent>
             </Card>
