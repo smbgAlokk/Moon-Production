@@ -82,12 +82,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             return attemptSignUp(retryCount + 1);
           }
           
-          console.error('Rate limiting error:', error);
-          return { 
-            error: { 
-              message: 'Too many sign-up attempts. Please wait a moment before trying again.' 
-            } 
-          };
+          // If it's a rate limit but we've exhausted retries, return a friendly message
+          if (error.message.includes('429') || error.message.includes('rate limit') || error.message.includes('too many requests')) {
+            return { 
+              error: { 
+                message: 'Too many sign-up attempts. Please wait a moment before trying again.' 
+              } 
+            };
+          }
+          
+          // Pass through the original error so the UI can detect cases like "email already registered"
+          return { error };
         }
         return { error };
       } catch (error) {
