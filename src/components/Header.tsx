@@ -31,13 +31,13 @@ const Header = () => {
       isScrolled ? 'glass-effect shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Logo */}
           <a href="/" className="flex items-center" aria-label="Moon Production Home">
             <img
               src="/logo.png"
               alt="Moon Production logo"
-              className="h-10 w-auto md:h-12 lg:h-14 drop-shadow-[0_0_18px_rgba(236,72,153,0.6)]"
+              className="h-12 w-auto sm:h-14 md:h-16 lg:h-20 drop-shadow-[0_0_22px_rgba(236,72,153,0.7)]"
             />
           </a>
 
