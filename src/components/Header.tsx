@@ -37,7 +37,7 @@ const Header = () => {
             <img
               src="/logo.png"
               alt="Moon Production logo"
-              className="h-12 w-auto sm:h-14 md:h-16 lg:h-20 drop-shadow-[0_0_22px_rgba(236,72,153,0.7)]"
+              className="h-16 w-auto sm:h-18 md:h-20 lg:h-24 drop-shadow-[0_0_22px_rgba(236,72,153,0.7)]"
             />
           </a>
 
