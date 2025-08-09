@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { Music, ArrowLeft, Eye, EyeOff, Phone, Mail, User, Lock, CheckCircle, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -40,6 +41,27 @@ const AuthPage = () => {
   const [signupStep, setSignupStep] = useState<'idle' | 'codeSent'>("idle");
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+
+  // Country options (default to India +91)
+  const countryOptions = [
+    { code: 'IN', dial: '+91', label: 'India' },
+    { code: 'US', dial: '+1', label: 'United States' },
+    { code: 'GB', dial: '+44', label: 'United Kingdom' },
+    { code: 'AE', dial: '+971', label: 'UAE' },
+    { code: 'AU', dial: '+61', label: 'Australia' },
+    { code: 'CA', dial: '+1', label: 'Canada' },
+    { code: 'DE', dial: '+49', label: 'Germany' },
+  ];
+
+  // OTP flows
+  const [signinCountryDial, setSigninCountryDial] = useState<string>("+91");
+  const [signinDigits, setSigninDigits] = useState<string>("");
+  const [signupCountryDial, setSignupCountryDial] = useState<string>("+91");
+  const [signupDigits, setSignupDigits] = useState<string>("");
+
+  // Email/password sign up mobile fields
+  const [signupFormCountryDial, setSignupFormCountryDial] = useState<string>("+91");
+  const [signupFormDigits, setSignupFormDigits] = useState<string>("");
   
   const { signIn, signUp, user, sendPhoneOtp, verifyPhoneOtp } = useAuth();
   const navigate = useNavigate();
@@ -189,7 +211,11 @@ const AuthPage = () => {
       const password = formData.get("password") as string;
       const confirmPassword = formData.get("confirmPassword") as string;
       const fullName = formData.get("fullName") as string;
-      const mobileNumber = formData.get("mobileNumber") as string;
+      
+      // Build E.164 mobile number from country dial + digits
+      const rawDigits = signupFormDigits.replace(/\D/g, '');
+      const countryDial = signupFormCountryDial;
+      const mobileNumber = `${countryDial}${rawDigits}`;
       
       // Enhanced validation
       if (!email || !email.includes('@')) {
@@ -216,10 +242,19 @@ const AuthPage = () => {
         return;
       }
       
-      if (!mobileNumber || mobileNumber.replace(/\D/g, '').length < 10) {
-        showAlert('error', '❌ Invalid Mobile Number', 'Please enter a valid mobile number.');
-        resetLoadingState();
-        return;
+      // Phone validation: India requires exactly 10 digits; others 6-15 digits
+      if (countryDial === '+91') {
+        if (rawDigits.length !== 10) {
+          showAlert('error', '❌ Invalid Mobile Number', 'Please enter a 10-digit Indian mobile number.');
+          resetLoadingState();
+          return;
+        }
+      } else {
+        if (rawDigits.length < 6 || rawDigits.length > 15) {
+          showAlert('error', '❌ Invalid Mobile Number', 'Please enter a valid international number (6-15 digits).');
+          resetLoadingState();
+          return;
+        }
       }
       
       const { error } = await signUp(email, password, fullName, mobileNumber);
@@ -263,13 +298,27 @@ const AuthPage = () => {
   };
 
   const handleSendOtp = async (mode: 'signin' | 'signup') => {
-    const phone = mode === 'signin' ? signinPhone : signupPhone;
-    if (!phone || !phone.startsWith('+')) {
-      showAlert('error', '❌ Invalid Phone', 'Enter phone in international format, e.g., +919876543210.');
-      return;
+    const dial = mode === 'signin' ? signinCountryDial : signupCountryDial;
+    const digits = (mode === 'signin' ? signinDigits : signupDigits).replace(/\D/g, '');
+
+    // Validate digits based on country dial
+    if (dial === '+91') {
+      if (digits.length !== 10) {
+        showAlert('error', '❌ Invalid Phone', 'Please enter a 10-digit Indian mobile number.');
+        return;
+      }
+    } else {
+      if (digits.length < 6 || digits.length > 15) {
+        showAlert('error', '❌ Invalid Phone', 'Please enter a valid international number (6-15 digits).');
+        return;
+      }
     }
+
+    const fullPhone = `${dial}${digits}`;
+    if (mode === 'signin') setSigninPhone(fullPhone); else setSignupPhone(fullPhone);
+
     setIsSendingOtp(true);
-    const { error } = await sendPhoneOtp(phone);
+    const { error } = await sendPhoneOtp(fullPhone);
     setIsSendingOtp(false);
     if (!error) {
       if (mode === 'signin') setSigninStep('codeSent');
@@ -501,13 +550,26 @@ const AuthPage = () => {
                     </div>
                     <div className="space-y-4">
                       <div className="space-y-2">
-                        <Label className="text-sm font-medium">Mobile number (E.164 format, e.g., +919876543210)</Label>
+                        <Label className="text-sm font-medium">Mobile number</Label>
                         <div className="flex gap-2">
+                          <Select value={signinCountryDial} onValueChange={setSigninCountryDial}>
+                            <SelectTrigger className="w-[140px]">
+                              <SelectValue placeholder="Code" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {countryOptions.map((c) => (
+                                <SelectItem key={c.dial} value={c.dial}>{c.label} {c.dial}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                           <Input
                             type="tel"
-                            placeholder="+91 XXXXXXXXXX"
-                            value={signinPhone}
-                            onChange={(e) => setSigninPhone(e.target.value)}
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            placeholder={signinCountryDial === '+91' ? '10-digit number' : 'Phone number'}
+                            maxLength={signinCountryDial === '+91' ? 10 : 15}
+                            value={signinDigits}
+                            onChange={(e) => setSigninDigits(e.target.value.replace(/\D/g, ''))}
                             disabled={isSendingOtp || isVerifyingOtp}
                             className="glass-effect border-primary/20"
                           />
@@ -519,6 +581,7 @@ const AuthPage = () => {
                             {isSendingOtp ? 'Sending...' : 'Send OTP'}
                           </Button>
                         </div>
+                        <p className="text-xs text-muted-foreground">Default +91 (India). Enter digits only.</p>
                         {signinStep === 'codeSent' && (
                           <div className="space-y-2">
                             <Label className="text-sm font-medium">Enter 6-digit OTP</Label>
@@ -559,19 +622,36 @@ const AuthPage = () => {
                         </div>
                       </div>
                       <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                        <Label htmlFor="signup-mobile" className="text-sm font-medium">Mobile Number</Label>
-                        <div className="relative group">
-                          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
-                          <Input 
-                            id="signup-mobile"
-                            name="mobileNumber" 
-                            type="tel" 
-                            placeholder="+91 XXXXXXXXXX"
-                            className="pl-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
-                            required 
-                            disabled={isLoading}
-                          />
+                        <Label className="text-sm font-medium">Mobile Number</Label>
+                        <div className="flex gap-2 items-center">
+                          <Select value={signupFormCountryDial} onValueChange={setSignupFormCountryDial}>
+                            <SelectTrigger className="w-[140px]">
+                              <SelectValue placeholder="Code" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {countryOptions.map((c) => (
+                                <SelectItem key={c.dial} value={c.dial}>{c.label} {c.dial}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <div className="relative flex-1 group">
+                            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
+                            <Input 
+                              id="signup-mobile"
+                              type="tel" 
+                              inputMode="numeric"
+                              pattern="[0-9]*"
+                              placeholder={signupFormCountryDial === '+91' ? '10-digit number' : 'Phone number'}
+                              maxLength={signupFormCountryDial === '+91' ? 10 : 15}
+                              value={signupFormDigits}
+                              onChange={(e) => setSignupFormDigits(e.target.value.replace(/\D/g, ''))}
+                              className="pl-10 glass-effect border-primary/20 focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:border-primary/40"
+                              required 
+                              disabled={isLoading}
+                            />
+                          </div>
                         </div>
+                        <p className="text-xs text-muted-foreground">Default +91 (India). Enter digits only.</p>
                       </div>
                       <div className="space-y-2 animate-slide-up" style={{ animationDelay: '0.3s' }}>
                         <Label htmlFor="signup-email" className="text-sm font-medium">Email Address</Label>
@@ -662,26 +742,40 @@ const AuthPage = () => {
                         </div>
                       </div>
                       <div className="space-y-4">
-                        <div className="space-y-2">
-                          <Label className="text-sm font-medium">Mobile number (E.164 format, e.g., +919876543210)</Label>
-                          <div className="flex gap-2">
-                            <Input
-                              type="tel"
-                              placeholder="+91 XXXXXXXXXX"
-                              value={signupPhone}
-                              onChange={(e) => setSignupPhone(e.target.value)}
-                              disabled={isSendingOtp || isVerifyingOtp}
-                              className="glass-effect border-primary/20"
-                            />
-                            <Button
-                              type="button"
-                              onClick={() => handleSendOtp('signup')}
-                              disabled={isSendingOtp || signupStep === 'codeSent'}
-                            >
-                              {isSendingOtp ? 'Sending...' : 'Send OTP'}
-                            </Button>
-                          </div>
-                          {signupStep === 'codeSent' && (
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium">Mobile number</Label>
+                        <div className="flex gap-2">
+                          <Select value={signupCountryDial} onValueChange={setSignupCountryDial}>
+                            <SelectTrigger className="w-[140px]">
+                              <SelectValue placeholder="Code" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {countryOptions.map((c) => (
+                                <SelectItem key={c.dial} value={c.dial}>{c.label} {c.dial}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <Input
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            placeholder={signupCountryDial === '+91' ? '10-digit number' : 'Phone number'}
+                            maxLength={signupCountryDial === '+91' ? 10 : 15}
+                            value={signupDigits}
+                            onChange={(e) => setSignupDigits(e.target.value.replace(/\D/g, ''))}
+                            disabled={isSendingOtp || isVerifyingOtp}
+                            className="glass-effect border-primary/20"
+                          />
+                          <Button
+                            type="button"
+                            onClick={() => handleSendOtp('signup')}
+                            disabled={isSendingOtp || signupStep === 'codeSent'}
+                          >
+                            {isSendingOtp ? 'Sending...' : 'Send OTP'}
+                          </Button>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Default +91 (India). Enter digits only.</p>
+                        {signupStep === 'codeSent' && (
                             <div className="space-y-2">
                               <Label className="text-sm font-medium">Enter 6-digit OTP</Label>
                               <InputOTP maxLength={6} value={signupOtp} onChange={setSignupOtp} className="w-full">
