@@ -33,19 +33,13 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center studio-glow">
-              <span className="text-primary-foreground font-heading text-xl">🌙</span>
-            </div>
-            <div className="min-w-0">
-              <h1 className="font-heading text-base sm:text-lg md:text-xl lg:text-2xl text-gradient truncate">
-                MOON PRODUCTION
-              </h1>
-              <p className="text-xs text-muted-foreground hidden sm:block">
-                Where Music Meets Magic
-              </p>
-            </div>
-          </div>
+          <a href="/" className="flex items-center" aria-label="Moon Production Home">
+            <img
+              src="/logo.png"
+              alt="Moon Production logo"
+              className="h-10 w-auto md:h-12 lg:h-14 drop-shadow-[0_0_18px_rgba(236,72,153,0.6)]"
+            />
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
