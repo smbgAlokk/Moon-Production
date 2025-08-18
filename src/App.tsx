@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import ScrollToTop from "./components/ScrollToTop";
+import AnimatedMicrophone from "./components/AnimatedMicrophone";
 import Index from "./pages/Index";
 import BookingPage from "./pages/BookingPage";
 import AuthPage from "./pages/AuthPage";
@@ -28,6 +29,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <AnimatedMicrophone />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/booking" element={<BookingPage />} />
