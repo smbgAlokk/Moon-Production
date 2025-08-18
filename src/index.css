@@ -8,55 +8,74 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
+    /* Premium Dark Base */
+    --background: 210 12% 6%;
+    --foreground: 320 8% 94%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    /* Card & Surface */
+    --card: 210 15% 8%;
+    --card-foreground: 320 8% 94%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 210 15% 8%;
+    --popover-foreground: 320 8% 94%;
 
-    --primary: 322 100% 39%;
-    --primary-foreground: 0 0% 98%;
+    /* Primary Fuchsia Theme */
+    --primary: 320 100% 58%;
+    --primary-glow: 320 100% 68%;
+    --primary-dark: 320 80% 35%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 95%;
+    /* Secondary Dark Grey */
+    --secondary: 215 15% 18%;
+    --secondary-foreground: 320 8% 94%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    /* Muted & Text */
+    --muted: 215 15% 16%;
+    --muted-foreground: 320 6% 72%;
 
-    --accent: 240 100% 65%;
-    --accent-foreground: 0 0% 98%;
+    /* Accent Purple */
+    --accent: 280 100% 70%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 322 100% 39%;
+    /* Borders & Inputs */
+    --border: 215 15% 22%;
+    --input: 215 15% 16%;
+    --ring: 320 100% 58%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Studio-specific design tokens */
-    --studio-glow: 322 100% 39%;
-    --studio-blue: 240 100% 65%;
-    --studio-dark: 0 0% 8%;
-    --studio-surface: 0 0% 10%;
+    /* Premium Studio Design Tokens */
+    --studio-fuchsia: 320 100% 58%;
+    --studio-purple: 280 100% 70%;
+    --studio-dark: 210 12% 6%;
+    --studio-grey: 215 15% 18%;
+    --studio-surface: 210 15% 8%;
+    --studio-accent: 270 100% 75%;
     
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--studio-dark)), hsl(var(--primary) / 0.2));
-    --gradient-glow: radial-gradient(circle at center, hsl(var(--primary) / 0.3), transparent 70%);
-    --gradient-accent: linear-gradient(90deg, hsl(322 100% 60%), hsl(240 100% 75%));
+    /* Premium Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--studio-dark)) 0%, hsl(var(--studio-grey)) 50%, hsl(var(--studio-fuchsia) / 0.1) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--studio-fuchsia)) 0%, hsl(var(--studio-purple)) 100%);
+    --gradient-surface: linear-gradient(145deg, hsl(var(--studio-surface)) 0%, hsl(var(--studio-grey) / 0.8) 100%);
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--studio-fuchsia) / 0.4), hsl(var(--studio-purple) / 0.2), transparent 70%);
+    --gradient-accent: linear-gradient(90deg, hsl(var(--studio-fuchsia)) 0%, hsl(var(--studio-purple)) 50%, hsl(var(--studio-accent)) 100%);
+    --gradient-animated: linear-gradient(-45deg, hsl(var(--studio-fuchsia)) 0%, hsl(var(--studio-purple)) 25%, hsl(var(--studio-dark)) 50%, hsl(var(--studio-purple)) 75%, hsl(var(--studio-fuchsia)) 100%);
     
-    /* Shadows and effects */
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.4);
-    --shadow-studio: 0 10px 30px -10px hsl(var(--primary) / 0.3);
-    --blur-glass: blur(10px);
+    /* Premium Shadows & Effects */
+    --shadow-glow: 0 0 60px hsl(var(--studio-fuchsia) / 0.5);
+    --shadow-glow-purple: 0 0 60px hsl(var(--studio-purple) / 0.4);
+    --shadow-premium: 0 20px 60px -10px hsl(var(--studio-fuchsia) / 0.3);
+    --shadow-glass: 0 8px 32px hsl(var(--studio-dark) / 0.3);
+    --blur-glass: blur(16px);
+    --blur-backdrop: blur(8px);
     
-    /* Animations */
+    /* Premium Animations */
+    --transition-premium: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-micro: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -130,37 +149,93 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Studio-specific components */
+  /* Premium Studio Components */
   .studio-glow {
     box-shadow: var(--shadow-glow);
+    transition: var(--transition-premium);
+  }
+
+  .studio-glow-purple {
+    box-shadow: var(--shadow-glow-purple);
+    transition: var(--transition-premium);
   }
   
   .studio-gradient {
     background: var(--gradient-hero);
   }
+
+  .premium-gradient {
+    background: var(--gradient-primary);
+  }
+
+  .animated-gradient {
+    background: var(--gradient-animated);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+  }
   
   .glass-effect {
     backdrop-filter: var(--blur-glass);
-    background: hsl(var(--card) / 0.8);
-    border: 1px solid hsl(var(--border) / 0.5);
+    background: hsl(var(--card) / 0.7);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-premium {
+    backdrop-filter: var(--blur-backdrop);
+    background: hsl(var(--studio-surface) / 0.8);
+    border: 1px solid hsl(var(--studio-fuchsia) / 0.2);
+    box-shadow: var(--shadow-premium);
   }
   
   .hover-glow:hover {
     box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
-    transition: var(--transition-smooth);
+    transform: translateY(-3px) scale(1.02);
+    transition: var(--transition-premium);
+  }
+
+  .hover-micro:hover {
+    transform: translateY(-1px) scale(1.01);
+    transition: var(--transition-micro);
+  }
+
+  .button-premium {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-premium);
+    border: 1px solid hsl(var(--studio-fuchsia) / 0.3);
+    transition: var(--transition-premium);
+  }
+
+  .button-premium:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-glow);
   }
   
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 4s ease-in-out infinite 2s;
   }
   
   .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    animation: gradient-shift 8s ease infinite;
   }
   
   .text-gradient {
     background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-premium {
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -177,18 +252,56 @@ All colors MUST be HSL.
   }
 }
 
+/* Premium Keyframes */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  33% { 
+    transform: translateY(-15px) rotate(1deg); 
+  }
+  66% { 
+    transform: translateY(-8px) rotate(-1deg); 
+  }
 }
 
 @keyframes pulse-glow {
   0%, 100% { 
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 30px hsl(var(--studio-fuchsia) / 0.4);
   }
   50% { 
-    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+    box-shadow: 0 0 60px hsl(var(--studio-fuchsia) / 0.8), 0 0 80px hsl(var(--studio-purple) / 0.4);
   }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes microphone-roll {
+  0% { 
+    transform: translateY(-100vh) translateX(-50px) rotate(-180deg);
+    opacity: 0;
+  }
+  60% { 
+    transform: translateY(10px) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  80% { 
+    transform: translateY(-5px) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 /* Custom Animations for Enhanced Auth Page */

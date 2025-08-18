@@ -71,10 +71,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				studio: {
-					glow: 'hsl(var(--studio-glow))',
-					blue: 'hsl(var(--studio-blue))',
+					fuchsia: 'hsl(var(--studio-fuchsia))',
+					purple: 'hsl(var(--studio-purple))',
 					dark: 'hsl(var(--studio-dark))',
-					surface: 'hsl(var(--studio-surface))'
+					grey: 'hsl(var(--studio-grey))',
+					surface: 'hsl(var(--studio-surface))',
+					accent: 'hsl(var(--studio-accent))'
 				}
 			},
 			borderRadius: {
@@ -84,25 +86,47 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'gradient-shift': {
+					'0%': { 'background-position': '0% 50%' },
+					'50%': { 'background-position': '100% 50%' },
+					'100%': { 'background-position': '0% 50%' }
+				},
+				'microphone-roll': {
+					'0%': { 
+						transform: 'translateY(-100vh) translateX(-50px) rotate(-180deg)',
+						opacity: '0'
 					},
-					to: {
-						height: '0'
+					'60%': { 
+						transform: 'translateY(10px) translateX(0) rotate(0deg)',
+						opacity: '1'
+					},
+					'80%': { 
+						transform: 'translateY(-5px) translateX(0) rotate(0deg)',
+						opacity: '1'
+					},
+					'100%': { 
+						transform: 'translateY(0) translateX(0) rotate(0deg)',
+						opacity: '1'
 					}
+				},
+				'shimmer': {
+					'0%': { 'background-position': '-200% center' },
+					'100%': { 'background-position': '200% center' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'gradient-shift': 'gradient-shift 8s ease infinite',
+				'microphone-roll': 'microphone-roll 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
+				'shimmer': 'shimmer 2s infinite'
 			}
 		}
 	},
