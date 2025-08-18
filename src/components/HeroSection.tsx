@@ -15,7 +15,7 @@ const HeroSection = () => {
         <img 
           src={heroBackground} 
           alt="Professional recording studio" 
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-85"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-studio-dark via-studio-dark/80 to-transparent"></div>
       </div>
@@ -24,7 +24,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-10">
         <motion.div 
           className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, hsl(var(--studio-fuchsia) / 0.3), transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, hsl(var(--studio-fuchsia) / 0.1), transparent 80%)' }}
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.6, 0.3]
