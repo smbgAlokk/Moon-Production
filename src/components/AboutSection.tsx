@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award, Users, Clock, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   const achievements = [
@@ -66,12 +67,16 @@ const AboutSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="studio-glow hover-glow transition-bounce">
-                Schedule a Tour
-              </Button>
-              <Button variant="outline" size="lg" className="hover-glow transition-bounce">
-                View Our Work
-              </Button>
+              <Link to="/schedule-tour">
+                <Button size="lg" className="studio-glow hover-glow transition-bounce w-full sm:w-auto">
+                  Schedule a Tour
+                </Button>
+              </Link>
+              <Link to="/view-work">
+                <Button variant="outline" size="lg" className="hover-glow transition-bounce w-full sm:w-auto">
+                  View Our Work
+                </Button>
+              </Link>
             </div>
           </div>
 
