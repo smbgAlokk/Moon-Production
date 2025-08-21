@@ -165,11 +165,11 @@ Moon-Production/
 
 ### 📌 Component Hierarchy
 
-![Component Hierarchy](component_hierarchy.png)
+![Component Hierarchy](public/component_hierarchy.png)
 
 ### 📌 High-Level Architecture
 
-![High-Level Architecture](architecture.png)
+![High-Level Architecture](public/architecture.png)
 
 ---
 
