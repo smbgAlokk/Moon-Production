@@ -33,7 +33,7 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Logo */}
-          <a href="/" className="flex items-center" aria-label="Moon Production Home">
+          <a href="/" className="flex items-center hover:scale-110 transition-transform duration-300 ease-in-out" aria-label="Moon Production Home">
             <img
               src="/logo.png"
               alt="Moon Production logo"
@@ -48,7 +48,7 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-foreground hover:text-primary transition-studio font-medium"
+                  className="text-foreground hover:text-primary hover:scale-110 transition-all duration-300 ease-in-out font-medium"
                 >
                   {item.name}
                 </Link>
@@ -56,7 +56,7 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-foreground hover:text-primary transition-studio font-medium"
+                  className="text-foreground hover:text-primary hover:scale-110 transition-all duration-300 ease-in-out font-medium"
                 >
                   {item.name}
                 </a>
@@ -127,7 +127,7 @@ const Header = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="text-foreground hover:text-primary transition-studio font-medium py-2"
+                    className="text-foreground hover:text-primary hover:scale-105 transition-all duration-300 ease-in-out font-medium py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -136,7 +136,7 @@ const Header = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-foreground hover:text-primary transition-studio font-medium py-2"
+                    className="text-foreground hover:text-primary hover:scale-105 transition-all duration-300 ease-in-out font-medium py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
