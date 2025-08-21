@@ -41,9 +41,9 @@ const ScheduleTourPage = () => {
 
   return (
     <div className="min-h-screen bg-studio-dark relative overflow-hidden">
-      {/* Animated Background */}
+      {/* Static Background */}
       <div className="fixed inset-0 z-0">
-        <motion.div 
+        <div 
           className="absolute inset-0"
           style={{
             background: `
@@ -52,44 +52,7 @@ const ScheduleTourPage = () => {
               linear-gradient(135deg, hsl(var(--studio-dark)) 0%, hsl(var(--studio-charcoal)) 100%)
             `
           }}
-          animate={{
-            background: [
-              `radial-gradient(circle at 20% 30%, hsl(var(--studio-fuchsia) / 0.1) 0%, transparent 50%),
-               radial-gradient(circle at 80% 70%, hsl(var(--studio-purple) / 0.15) 0%, transparent 50%),
-               linear-gradient(135deg, hsl(var(--studio-dark)) 0%, hsl(var(--studio-charcoal)) 100%)`,
-              `radial-gradient(circle at 80% 30%, hsl(var(--studio-fuchsia) / 0.15) 0%, transparent 50%),
-               radial-gradient(circle at 20% 70%, hsl(var(--studio-purple) / 0.1) 0%, transparent 50%),
-               linear-gradient(135deg, hsl(var(--studio-charcoal)) 0%, hsl(var(--studio-dark)) 100%)`,
-              `radial-gradient(circle at 20% 30%, hsl(var(--studio-fuchsia) / 0.1) 0%, transparent 50%),
-               radial-gradient(circle at 80% 70%, hsl(var(--studio-purple) / 0.15) 0%, transparent 50%),
-               linear-gradient(135deg, hsl(var(--studio-dark)) 0%, hsl(var(--studio-charcoal)) 100%)`
-            ]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        
-        {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-studio-fuchsia rounded-full opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.8, 0.3],
-              scale: [1, 1.5, 1]
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut"
-            }}
-          />
-        ))}
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
@@ -101,7 +64,7 @@ const ScheduleTourPage = () => {
           transition={{ duration: 0.6 }}
         >
           <Link to="/">
-            <Button variant="ghost" size="sm" className="studio-glow hover-glow">
+            <Button variant="ghost" size="sm" className="studio-glow hover:scale-105 transition-transform duration-200">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Home
             </Button>
@@ -133,12 +96,7 @@ const ScheduleTourPage = () => {
             <Card className="glass-effect border-studio-fuchsia/30">
               <CardContent className="p-8">
                 <div className="aspect-video bg-gradient-to-br from-studio-charcoal to-studio-dark rounded-lg flex items-center justify-center relative overflow-hidden">
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-studio-fuchsia/20 to-studio-purple/20"
-                    animate={{ opacity: [0.2, 0.4, 0.2] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <Button size="lg" className="studio-glow hover-glow z-10">
+                  <Button size="lg" className="studio-glow hover:scale-105 transition-transform duration-200 z-10">
                     <Play className="w-6 h-6 mr-2" />
                     Watch Studio Tour
                   </Button>
@@ -191,7 +149,11 @@ const ScheduleTourPage = () => {
                             variant={selectedTime === time ? "default" : "outline"}
                             size="sm"
                             onClick={() => setSelectedTime(time)}
-                            className={`studio-glow ${selectedTime === time ? 'bg-studio-fuchsia hover:bg-studio-fuchsia/80' : 'hover-glow'}`}
+                            className={`transition-all duration-150 ${
+                              selectedTime === time 
+                                ? 'bg-studio-fuchsia hover:bg-studio-fuchsia/80' 
+                                : 'hover:bg-studio-fuchsia/10 hover:border-studio-fuchsia/50 hover:scale-[1.02]'
+                            }`}
                           >
                             {time}
                           </Button>
@@ -230,20 +192,19 @@ const ScheduleTourPage = () => {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
             <div className="space-y-6">
               {studioRooms.map((room, index) => (
-                <motion.div
+                <div
                   key={room.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                  className="opacity-0 animate-fade-in"
+                  style={{ animationDelay: `${0.8 + index * 0.1}s` }}
                 >
-                  <Card className="glass-effect border-studio-fuchsia/20 hover-glow transition-studio group">
+                  <Card className="glass-effect border-studio-fuchsia/20 hover:border-studio-fuchsia/40 transition-all duration-200 group">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-20 h-20 bg-gradient-to-br from-studio-fuchsia/20 to-studio-purple/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:from-studio-fuchsia/30 group-hover:to-studio-purple/30 transition-studio">
+                        <div className="w-20 h-20 bg-gradient-to-br from-studio-fuchsia/20 to-studio-purple/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:from-studio-fuchsia/30 group-hover:to-studio-purple/30 transition-all duration-200">
                           <Image className="w-8 h-8 text-studio-fuchsia" />
                         </div>
                         <div className="flex-1">
@@ -265,18 +226,13 @@ const ScheduleTourPage = () => {
                       
                       {/* Placeholder for Room Photo */}
                       <div className="mt-4 aspect-video bg-gradient-to-br from-studio-charcoal to-studio-dark rounded-lg relative overflow-hidden">
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-studio-fuchsia/10 to-studio-purple/10"
-                          animate={{ opacity: [0.1, 0.3, 0.1] }}
-                          transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
-                        />
                         <div className="absolute inset-0 flex items-center justify-center">
                           <Video className="w-12 h-12 text-studio-fuchsia/50" />
                         </div>
                       </div>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.div>
@@ -291,16 +247,11 @@ const ScheduleTourPage = () => {
         >
           <Button 
             size="lg" 
-            className="studio-glow hover-glow transition-bounce px-12 py-6 text-lg"
+            className="studio-glow hover:scale-105 transition-transform duration-200 px-12 py-6 text-lg"
             disabled={!selectedDate || !selectedTime}
           >
             <CalendarIcon className="w-6 h-6 mr-3" />
             Confirm Your Tour
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-studio-fuchsia/20 to-studio-purple/20 rounded-lg"
-              animate={{ opacity: [0, 0.5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
           </Button>
           {selectedDate && selectedTime && (
             <motion.p 

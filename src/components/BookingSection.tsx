@@ -272,7 +272,7 @@ const BookingSection = () => {
                 </div>
 
                 <Button 
-                  className="w-full studio-glow hover-glow transition-bounce"
+                  className="w-full studio-glow hover:scale-[1.02] hover:shadow-lg transition-all duration-200"
                   onClick={handleBooking}
                   size="lg"
                 >
@@ -294,7 +294,7 @@ const BookingSection = () => {
                 </p>
                 <Button 
                   variant="outline" 
-                  className="w-full hover-glow"
+                  className="w-full hover:scale-[1.02] hover:shadow-lg transition-all duration-200"
                   onClick={() => window.open('https://wa.me/918528934948', '_blank')}
                 >
                   📱 WhatsApp Us
