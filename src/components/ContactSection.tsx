@@ -72,9 +72,9 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      info: "Connaught Place, New Delhi",
-      description: "Delhi 110001, India",
-      action: "https://maps.google.com",
+      info: "Dwarka, New Delhi",
+      description: "Mohan Garden, Razapur Khurd, Delhi, 110059",
+      action: "https://www.google.com/maps/place/Moon+Studio/@28.6347796,77.038688,17z/data=!4m6!3m5!1s0x390d05d25ef01615:0x65d550994b44b85e!8m2!3d28.6324972!4d77.0371791!16s%2Fg%2F11xrf0vflr?entry=ttu&g_ep=EgoyMDI1MDgxOC4wIKXMDSoASAFQAw%3D%3D",
     },
     {
       icon: MessageCircle,
@@ -289,16 +289,19 @@ const ContactSection = () => {
                 <div className="text-center px-4">
                   <MapPin className="w-8 h-8 sm:w-12 sm:h-12 text-primary mx-auto mb-3 sm:mb-4" />
                   <p className="text-base sm:text-lg font-heading text-foreground mb-2">
-                    Moon Production Studio
+                    Moon Studio
                   </p>
                   <p className="text-sm sm:text-base text-muted-foreground">
-                    Dwarka, New Delhi - 110059
+                  
                   </p>
                   <Button
                     variant="outline"
                     className="mt-4 hover-glow text-sm sm:text-base"
                     onClick={() =>
-                      window.open("https://maps.google.com/J2MP+2W6", "_blank")
+                      window.open(
+                        "https://www.google.com/maps/place/Moon+Studio/@28.6347796,77.038688,17z/data=!4m6!3m5!1s0x390d05d25ef01615:0x65d550994b44b85e!8m2!3d28.6324972!4d77.0371791!16s%2Fg%2F11xrf0vflr?entry=ttu&g_ep=EgoyMDI1MDgxOC4wIKXMDSoASAFQAw%3D%3D",
+                        "_blank"
+                      )
                     }
                   >
                     <span className="hidden sm:inline">

@@ -73,7 +73,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 mr-2 text-primary" />
-                Dwarka, New Delhi
+                Moon Studio, R Block Rd, near Verma medical store, Block P, Mohan Garden, Razapur Khurd, Delhi, 110059
               </div>
             </div>
           </div>

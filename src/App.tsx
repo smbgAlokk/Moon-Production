@@ -19,6 +19,7 @@ import ServicesPricingPage from "./pages/ServicesPricingPage";
 import ScheduleTourPage from "./pages/ScheduleTourPage";
 import ViewWorkPage from "./pages/ViewWorkPage";
 import NotFound from "./pages/NotFound";
+import CreativeStudioPage from "./pages/CreativeStudioPage";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/services-pricing" element={<ServicesPricingPage />} />
             <Route path="/schedule-tour" element={<ScheduleTourPage />} />
             <Route path="/view-work" element={<ViewWorkPage />} />
+            <Route path="/creative-studio" element={<CreativeStudioPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

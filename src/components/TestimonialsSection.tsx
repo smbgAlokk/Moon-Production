@@ -12,7 +12,7 @@ const TestimonialsSection = () => {
       role: "Independent Artist",
       project: "EP Recording & Mixing",
       rating: 5,
-      text: "Best studio in Delhi for professional mixing! The team at Moon Production helped me achieve the exact sound I was looking for. The equipment is top-notch and the atmosphere is incredibly creative.",
+      text: "Best studio in West Delhi for professional mixing! The team at Moon Production helped me achieve the exact sound I was looking for. The equipment is top-notch and the atmosphere is incredibly creative.",
       avatar: "🎤"
     },
     {
@@ -28,7 +28,7 @@ const TestimonialsSection = () => {
       role: "Music Producer",
       project: "Album Production",
       rating: 5,
-      text: "Moon Production helped me find my true sound. Working with their team was an amazing experience. The acoustic treatment and equipment quality is unmatched in Delhi.",
+      text: "Moon Production helped me find my true sound. Working with their team was an amazing experience. The acoustic treatment and equipment quality is unmatched in West Delhi.",
       avatar: "🎵"
     },
     {

@@ -178,8 +178,8 @@ const ScheduleTourPage = () => {
                     <MapPin className="w-5 h-5 text-studio-purple" />
                     <h3 className="text-lg font-medium text-studio-light">Studio Location</h3>
                   </div>
-                  <p className="text-studio-muted mb-2">Moon Production Studio</p>
-                  <p className="text-studio-muted">Delhi, India</p>
+                  <p className="text-studio-muted mb-2">Moon Studio</p>
+                  <p className="text-studio-muted">R Block Rd, near Verma medical store, Block P, Mohan Garden, Razapur Khurd, Delhi, 110059</p>
                   <Badge variant="outline" className="mt-3 border-studio-purple/50 text-studio-purple">
                     Free Parking Available
                   </Badge>

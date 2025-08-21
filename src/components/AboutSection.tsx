@@ -52,7 +52,7 @@ const AboutSection = () => {
               <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
                 <p>
                   Moon Production is not just a studio — it's a space where creativity flows.
-                  We're based in Delhi and offer end-to-end audio and visual production: from vocal recording 
+                  We're based at Moon Studio, R Block Rd, near Verma medical store, Block P, Mohan Garden, Razapur Khurd, Delhi, 110059 and offer end-to-end audio and visual production: from vocal recording 
                   and music production to podcasts, voiceovers, and music videos.
                 </p>
                 <p>
