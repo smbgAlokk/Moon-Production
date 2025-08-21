@@ -179,7 +179,22 @@ const ScheduleTourPage = () => {
                     <h3 className="text-lg font-medium text-studio-light">Studio Location</h3>
                   </div>
                   <p className="text-studio-muted mb-2">Moon Studio</p>
-                  <p className="text-studio-muted">R Block Rd, near Verma medical store, Block P, Mohan Garden, Razapur Khurd, Delhi, 110059</p>
+                  <p className="text-studio-muted">New Delhi, 110059</p>
+                  <Button
+                    variant="outline"
+                    className="mt-4 hover-glow text-sm sm:text-base"
+                    onClick={() =>
+                      window.open(
+                        "https://www.google.com/maps/place/Moon+Studio/@28.6347796,77.038688,17z/data=!4m6!3m5!1s0x390d05d25ef01615:0x65d550994b44b85e!8m2!3d28.6324972!4d77.0371791!16s%2Fg%2F11xrf0vflr?entry=ttu&g_ep=EgoyMDI1MDgxOC4wIKXMDSoASAFQAw%3D%3D",
+                        "_blank"
+                      )
+                    }
+                  >
+                    <span className="hidden sm:inline">
+                      View on Google Maps
+                    </span>
+                    <span className="sm:hidden">View Map</span>
+                  </Button>
                   <Badge variant="outline" className="mt-3 border-studio-purple/50 text-studio-purple">
                     Free Parking Available
                   </Badge>
